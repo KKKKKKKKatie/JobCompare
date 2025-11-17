@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.ComparingTwoJobs"
+    android:background="#FAF6FF">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:text="@string/job_comparison_app_title"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:background="@color/header_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_compare_two_jobs"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/comparing_two_jobs_title"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp"
+        app:cornerRadius="8dp"
+        android:clickable="false"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <!-- Table Layout for Job Comparison -->
+    <TableLayout
+        android:id="@+id/comparison_table"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:background="#e6e6fa"
+        app:layout_constraintTop_toBottomOf="@id/btn_compare_two_jobs"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Table Rows for Job Comparison Details -->
+        <TableRow>
+            <TextView
+                android:text=""
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:background="#b0c4de"
+                android:padding="8dp" />
+            <TextView
+                android:text="@string/job1"
+                android:id="@+id/job1_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:background="#b0c4de"
+                android:padding="8dp" />
+            <TextView
+                android:text="@string/job2"
+                android:id="@+id/job2_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:background="#b0c4de"
+                android:padding="8dp" />
+        </TableRow>
+    <!-- Table Rows for Job Comparison Details -->
+    <TableRow>
+        <TextView
+            android:text="@string/title_input_label"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+        <TextView
+            android:id="@+id/job1_title"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+        <TextView
+            android:id="@+id/job2_title"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="@string/company_input_label"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+        <TextView
+            android:id="@+id/job1_company"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+        <TextView
+            android:id="@+id/job2_company"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="@string/location_row_header"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+        <TextView
+            android:id="@+id/job1_location"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+        <TextView
+            android:id="@+id/job2_location"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="@string/ays_row_header"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+        <TextView
+            android:id="@+id/job1_salary_ays"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+        <TextView
+            android:id="@+id/job2_salary_ays"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="@string/ayb_row_header"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+        <TextView
+            android:id="@+id/job1_bonus_ayb"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+        <TextView
+            android:id="@+id/job2_bonus_ayb"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="@string/retirement_row_header"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+        <TextView
+            android:id="@+id/job1_retirement"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+        <TextView
+            android:id="@+id/job2_retirement"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="@string/restricted_stock_unit_rsua_row_header"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+        <TextView
+            android:id="@+id/job1_rsu"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+        <TextView
+            android:id="@+id/job2_rsu"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="@string/personalized_learning_and_development_row_header"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+        <TextView
+            android:id="@+id/job1_pld"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+        <TextView
+            android:id="@+id/job2_pld"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:text="@string/family_planning_assistance_row_header"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+        <TextView
+            android:id="@+id/job1_fpa"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+        <TextView
+            android:id="@+id/job2_fpa"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp" />
+    </TableRow>
+
+</TableLayout>
+    <!-- Action Buttons: Main Menu and Perform Another Comparison -->
+    <LinearLayout
+        android:id="@+id/action_buttons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/btn_main_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Main Menu"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#D3D3D3"
+            android:layout_marginEnd="16dp" />
+
+        <Button
+            android:id="@+id/btn_perform_another_comparison"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Perform Another Comparison"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/black" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

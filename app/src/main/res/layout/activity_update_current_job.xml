@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAF6FF"
+    tools:context=".controller.UpdateCurrentJob">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/header_color"
+        android:gravity="center"
+        android:text="@string/job_comparison_app_title"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_update_current_job"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="16dp"
+        android:backgroundTint="@color/white"
+        android:clickable="false"
+        android:padding="12dp"
+        android:text="@string/update_current_job_title"
+        android:textColor="@color/black"
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp" />
+
+    <!-- ScrollView to wrap all content -->
+    <ScrollView
+        android:id="@+id/scroll_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_update_current_job"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+            <TextView
+                android:id="@+id/label_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_input_label"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"/>
+
+            <EditText
+                android:id="@+id/input_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:background="@android:color/white"
+                android:hint="Value"
+                android:padding="12dp" />
+
+            <!-- Company Input -->
+            <TextView
+                android:id="@+id/label_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"
+                android:text="@string/company_input_label"/>
+
+            <EditText
+                android:id="@+id/input_company"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="4dp"
+                android:background="@android:color/white"
+                android:hint="Value"
+                android:padding="12dp"/>
+
+            <!-- Location City Input -->
+            <TextView
+                android:id="@+id/label_location_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/city_input_label"/>
+
+            <EditText
+                android:id="@+id/input_location_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="4dp"
+                android:background="@android:color/white"
+                android:hint="Value"
+                android:padding="12dp"/>
+
+            <TextView
+                android:id="@+id/label_location_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/state_input_label"/>
+
+            <EditText
+                android:id="@+id/input_location_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="4dp"
+                android:background="@android:color/white"
+                android:hint="Value"
+                android:padding="12dp"/>
+
+            <!-- Cost of Living Input -->
+            <TextView
+                android:id="@+id/label_cost_of_living"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/cost_of_living_input_label"/>
+
+            <EditText
+                android:id="@+id/input_cost_of_living"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="4dp"
+                android:background="@android:color/white"
+                android:hint="Value"
+                android:padding="12dp"/>
+
+
+            <!-- Yearly Salary Input -->
+            <TextView
+                android:id="@+id/label_yearly_salary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/yearly_salary_input_label"/>
+
+
+            <EditText
+                android:id="@+id/input_yearly_salary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="4dp"
+                android:background="@android:color/white"
+                android:hint="Value"
+                android:padding="12dp"/>
+
+            <!-- Yearly Bonus Input -->
+            <TextView
+                android:id="@+id/label_yearly_bonus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/yearly_bonus_input_label"/>
+
+
+            <EditText
+                android:id="@+id/input_yearly_bonus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="4dp"
+                android:background="@android:color/white"
+                android:hint="Value"
+                android:padding="12dp" />
+
+            <!-- Retirement Input -->
+            <TextView
+                android:id="@+id/label_retirement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/retirement_0_100_input_label"/>
+
+
+            <EditText
+                android:id="@+id/input_retirement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="4dp"
+                android:background="@android:color/white"
+                android:hint="Value"
+                android:padding="12dp" />
+
+            <!-- Restricted Stock -->
+            <TextView
+                android:id="@+id/label_restricted_stock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/restricted_stock_input_label"/>
+
+
+            <EditText
+                android:id="@+id/input_restricted_stock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="4dp"
+                android:background="@android:color/white"
+                android:hint="Value"
+                android:padding="12dp" />
+
+            <!-- Personalized Learning & Development Input -->
+            <TextView
+                android:id="@+id/label_learning_dev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/personalized_learning_development_0_18000_input_label"/>
+
+
+            <EditText
+                android:id="@+id/input_learning_dev"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="4dp"
+                android:background="@android:color/white"
+                android:hint="Value"
+                android:padding="12dp" />
+
+            <!-- Family Planning Assistance Input -->
+            <TextView
+                android:id="@+id/label_fam_assistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/family_planning_assistance_up_to_12_of_yearly_salary_input_label"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/input_learning_dev" />
+
+
+            <EditText
+                android:id="@+id/input_fam_assistance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="4dp"
+                android:background="@android:color/white"
+                android:hint="Value"
+                android:padding="12dp" />
+
+            <!-- Buttons at the Bottom -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#D3D3D3"
+                    android:text="@string/cancel_button"
+                    android:textColor="@android:color/black" />
+
+                <Button
+                    android:id="@+id/btn_save"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:backgroundTint="@android:color/black"
+                    android:text="@string/save_button"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/rounded_corner_dialog">
+
+    <TextView
+        android:id="@+id/tv_success_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/job_successfully_saved"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"/>
+
+    <!-- Enter another offer button -->
+    <Button
+        android:id="@+id/btn_enter_another_offer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_another_offer"
+        android:textColor="@android:color/black"
+        android:backgroundTint="#D3D3D3"
+        app:layout_constraintTop_toBottomOf="@id/tv_success_message"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Return to Main Menu button -->
+    <Button
+        android:id="@+id/btn_return_main_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/return_to_main_menu"
+        android:textColor="@android:color/black"
+        android:backgroundTint="#D3D3D3"
+        app:layout_constraintTop_toBottomOf="@id/btn_enter_another_offer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Compare Job Offers button -->
+    <Button
+        android:id="@+id/btn_compare_job_offers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/compare_job_offers"
+        android:textColor="@android:color/black"
+        android:backgroundTint="#D3D3D3"
+        app:layout_constraintTop_toBottomOf="@id/btn_return_main_menu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,76 @@
+# Group Project Design Description, Version 2
+Updates: Updated the requirements descriptions to match the system implementation using Android Studio, it's Activity's, and Intents.
+
+## Requirement 1: 
+#### When the app is started, the user is presented with the main menu, which allows the user to <br>(1) enter or edit current job details, <br>(2) enter job offers, <br>(3) adjust the comparison settings, or <br>(4) compare job offers (disabled if no job offers were entered yet).   
+
+To realize this requirement, The `MainMenu` class will serve as the entry point to the system, which will tie the various pieces of the system together. This class includes event listeners for buttons that trigger the following actions: <br>
+1. Enter or edit current job details through the UpdateCurrentJob activity.
+2. Enter job offers through the AddAJobOffer activity.
+3.  Adjust the comparison settings through the AdjustComparisonSettings activity
+4. Compare job offers, where the button will display appropriate error messages if no offers exist. This is implemented by checking whether there are any job offers stored for the user via the compareJobOffers method.
+
+The updated system uses Android Intents to navigate between these screens, passing the user_id to the various activities to ensure the current user's data is accessed.
+
+## Requirement 2: 
+#### When choosing to enter current job details, a user will: <br> A. Be shown a user interface to enter (if it is the first time) or edit all the details of their current job, which consists of: <br><ul><li>Title,</li> <li>Company,</li> <li>Location (entered as city and state),</li> <li>Cost of living in the location (expressed as an index),</li> <li>Yearly salary,</li> <li>Yearly bonus,</li> <li>Retirement (as % matched) (given as an integer from 0 to 100 inclusive),</li> <li>Restricted Stock (expressed as a lump sum vested over 3 years),</li> <li>Personalized Learning & Development ($0 to $18000 inclusive annually),</li> <li>Family Planning Assistance (one-time dollar amount up to 12% of Yearly Salary)</li></ul><br>B. Be able to either save the job details or cancel and exit without saving, returning in both cases to the main menu. 
+
+The UpdateCurrentJob class handles this requirement. When a user accesses this screen, the system checks if the user already has a current job by calling the `getCurrentJob()` method in `DatabaseHelper`. If the user has a current job, the form is pre-populated with the job details. Otherwise, the fields are left blank.
+
+Three other model classes are also of importance here: `User`, `Job`, and `Location`. `Job` holds the information pertaining to a job as described in the requirement and whether the job is a `Current` or a `Offer` (`jobType` enum attribute in the `Job` class). The location information has been extracted to a class called `Location`, and `Job` will have an attribute referencing that class (`locationId`). The UML Class Diagram also depicts the relationship between these two classes using an association with multiplicity ot 1-1, stating that one `Job` will have one `Location` and vise versa. The `Location` class will hold the `city`, `state`, and `costOfLivingIndex`. To distinguish between a current job and an offer (requirement 3), there is an attribute (`jobType`) to specify whether it’s a `Current` `JobType` or `Offer` `JobType` (this is an enum). We decided this instead of an abstract class with two implementation classes as there are no additional methods/functions one type of job can do over the other. This design debloats the design. As a user has a current job, we placed an attribute in the `Job` class (`userId`) to hold an instance of the associated id for the `User` class.  The UML class diagram depicts the relationship between `User` and `Job` through a composition relationship that states a `Job` cannot exist without a `User` attached to it. We took this design approach as a `Job` is always associated with a `User`.
+
+Requirement 2a is realized when a `User` wants to enter current job details. The `MainMenu` class navigate the user to the `UpdateCurrentJob` Activity class. Then, the `UpdateCurrentJob` activity will first check if a `User` has a `Job` of type `currentJob`. This will be done through a database call check in `DatabaseHelper` (through the `getCurrentJob()` method). If it is, then that means they have a current job and in turn the `currentJob` details will be displayed to the user on the edit screen. If it is not set, a blank form will be displayed to the user on the edit screen. It should be noted that the UML class diagram depicts a 1-1 association relationship between `MainMenu` and `User` as a 1 `MainMenu` instance is supporting/working with 1 `User`. 
+
+Requirement 2b is realized based on a user's action of save or cancel. Regardless of an initially populated or empty screen, when a user clicks save on the UI, the `UpdateCurrentJob` Activity class will edit the current job by calling the `DatabaseHelper`'s method (`insertCurrentJob()` or `updateCurrentJob()` depending on if a user already has a current job set). Both of these methods will take job details on the GUI and create a `Job` instance (through the constructor of the `Job` class, setting the `jobType` as `CurrentJob`) with the location attached to the job (through the constructor of the `Location` class), and set to the `user_id` attribute for the `Job` set to the `user_id` of the user for the application. If they click exit, the `UpdateCurrentJob` Activity class redirects the user back to the Main Menu screen (`MainMenu` Activity). 
+
+## Requirement 3: 
+#### When choosing to enter job offers, a user will: <br> A. Be shown a user interface to enter all the details of the offer, which are the same ones listed above for the current job. <br> B. Be able to either save the job offer details or cancel. <br> C. Be able to (1) enter another offer, (2) return to the main menu, or (3) compare the offer (if they saved it) with the current job details (if present). 
+
+This requirement is realized through the `AddAJobOffer` Activity class. This requirement also has two classes of importance here: `User` and `Job`. The `Job` class holds the information for a job (as described in the explanation for requirement 2) and will be associated to a specific `user_id` for the User class, with the `jobType` set to `Offer` to distinguish all job offers for a user.
+
+Requirement 3a will be handled entirely within the GUI implementation through the `AddAJobOffer` activity and its associated view.  
+
+Requirement 3b is realized when a user clicks save on the `AddAJobOffer` Activity class. This will trigger a call from to an onClick listener which will valdiate the inputs of the form. If valid, the associated `Job` and `Location` objects are created to be passed to the `DatabaseHelper`'s `insertJobOffer()` method to insert a jobOffer for a particular user (`user_id`). If a user clicks cancel, nothing is done and the `AddAJobOffer` Activity class navigates the user back to the `MainMenu` Activity class.
+
+Requirement 3c is handled entirely by the `AddAJobOffer` Activity class to take a user’s action of which they want to do (enter another offer, return to main menu, or compare the offers). Onclick listeners are implemented for buttons here to navigate a user to their corresponding Activity page.
+
+## Requirement 4: 
+#### When adjusting the comparison settings, the user can assign integer weights to: <br><ul><li>Yearly salary</li><li>Yearly bonus</li><li>Retirement</li><li>Restricted Stock</li><li>Personalized Learning & Development</li><li>Family Planning Assistance</li></ul><br>NOTE: These factors should be integer-based from 0 (no interest/don’t care) to 9 (highest interest). Default value for all weights: 1 <br><br>If no weights are assigned, all factors are considered equal. <br><br>The user must be able to either save the comparison settings or cancel both will return the user to the main menu. 
+
+This requirement is realized in the `ComparisonSettings` class. A `ComparisonSettings` will have an attribute that references who the settings belong to `user_id`. The UML class diagram also depicts a 1-1 association relationship between these two classes to state that 1 `User` will have 1 `ComparisonSettings` attached to it and vise versa. If a user wants to adjust their comparison settings, the `MainMenu` Activity class navigates to the  `AdjustComparisonSettings` Activity Class. This class will get the current settings to display on the page for adjustments. Then after the user clicks save their settings, the `AdjustComparisonSettings` Activity class will call the `upsertSettings()` method of the `DatabaseHelper` class, which will take all of the settings on the form of the GUI and update the existing record for the user's ComparisonSettings. It should be noted that our database automatically has 1 record attached to a user with the default weight in place. If a user never adjusts these settings, their associated Settings will remain with weights 1. The default value for the weights are also presented in the UML class diagram for the `ComparisonSettings` class.
+
+## Requirement 5: 
+#### When choosing to compare job offers, a user will: <br> A. Be shown a list of job offers, displayed as Title and Company, ranked from best to worst (see below for details), and including the current job (if present), clearly indicated. <br> B. Select two jobs to compare and trigger the comparison. <br> C. Be shown a table comparing the two jobs, displaying, for each job: <br><ul><li>Title</li><li>Company</li><li>Location</li><li>Yearly salary adjusted for cost of living (AYS)</li><li>Yearly bonus adjusted for cost of living (AYB)</li><li>Retirement (R)</li><li>Restricted Stock Unit (RSUA)</li><li>Personalized Learning & Development (PLD)</li><li>Family Planning Assistance (FPA)</li></ul><br>D. Be offered to perform another comparison or go back to the main menu. 
+
+This requirement is implemented in two Activity classes: `CompareJobOffers` and `ComparingTwoJobs`. This is split up because of the option to compare job offer from the Add A Job Offer page, and the compare job offers option from the Main Menu page.
+
+The `CompareJobOffers` Activity class will display a list of the user's job offers (including the current job if applicable) and allows the user to select two jobs for comparison. Jobs are ranked using the `Calculator` class, which computes job scores based on the user's ComparisonSettings. If the user has more or less than two jobs, the comparison will not be performed. 
+
+The `ComparingTwoJobs` Activity class will display a table comparing the selected jobs, including details such as the adjusted yearly salary (AYS), adjusted yearly bonus (AYB), retirement, stock units, learning development budget, and family planning assistance.
+
+More details on the ranking is described in Requirement 6.
+
+Requirement 5a is realized through the `getTitle()` and `getCompany()` methods for a `Job`. The `CompareJobOffers` Activity class will get all the user's jobs (current and job offers) using the `DatabaseHelper` method `getAllUserJobs()`, and rank them accordingly. More of how this is displayed as well as the ranking and if it's a current job or not is described in requirement 6. 
+
+The GUI implementation in the `CompareJobOffers` Activity class will handle requirement 5b for allowing the user to select two jobs to compare.  
+
+Once a user selects two jobs to compare, requirement 5c is realized in our class diagram. The GUI component will handle the rendering of the table, however each jobs information is realized in the `Job` class. When a user decides on two jobs to compare, the `ComparingTwoJobs` will display each jobs information (as retrieved from the `getJobOffer()` method of the `DatabaseHelper` class). For each job to be compared, we will display the job offer information, where the yearly salary adjusted for cost of living (AYS) and the yearly bonus adjusted for cost of living (AYB) are calculated using calculateAYS() and calculateAYB() respectively as part of the `Calculator` class. Since the rest of the Job details to be displayed are stored as is in the `Job` class, no other calculate functions are called besides the one for salary and bonus. The rest of the methods that are called are the getters for the fields. The `DatabaseHelper` `getJobOffer` method returns a `Job` object which has all these fields set, so we can access them using the `Job` classes getters.
+
+Requirement 5d is not a part of our class diagram as it is handled by GUI interaction. 
+
+## Requirement 6: 
+#### When ranking jobs, a job’s score is computed as the weighted average of: <br> `AYS + AYB + (R * AYS / 100) + (RSUA/3) + PLD + FPA`<br> where:<br>AYS = Yearly Salary Adjusted for cost of living <br>AYB = Yearly Bonus Adjusted for cost of living <br>R = Retirement (as % matched) (given as an integer from 0 to 100 inclusive) <br>RSUA = Restricted Stock (expressed as a lump sum vested over 3 years) <br>PLD = Personalized Learning & Development ($0 to $18000 inclusive annually)<br> FPA = Family Planning Assistance (one-time dollar amount up to 12% of Yearly Salary) <br><br>For example, if the weights are 2 for the yearly salary, 2 for the yearly bonus, 2 for Retirement, and 1 for all other factors, the score would be computed as: <br>`2/9 * AYS + 2/9 * AYB + 2/9 * (R * AYS / 100) + 1/9 * (RSUA/3) + 1/9 * PLD + 1/9 * FPA`
+
+ 
+
+This requirement is realized as part of requirement 5 when we are displaying the user’s job offers. Recall from requirement 5, the `CompareJobOffers` Activity class will get all the user's jobs (current and job offers) using the `DatabaseHelper` method `getAllUserJobs()`. This method returns a list of all the users jobs. The `CompareJobOffers` Activity class will then use the `Calculator`'s class method `calculateJobScore()` (shown in our UML class diagram) to calculate the job scores of each job returned and rank them accordingly. After the rankings are calculated and sorted, the GUI displays the necessary information: Title, Company, ranked from best to worst, and including the current job (if present), clearly indicated, as given through the `jobType` attribute of the `Job` class. 
+
+When displaying the two jobs to compare in the `ComparingTwoJobs` activity class, the activity class calls the `Calculator` class's `calculateAYS()` and `calculateAYB()` to get the adjusted yearly salary and adjusted yearly bonus and displays it as such in the comparison table.
+
+## Requirement 7: 
+#### The user interface must be intuitive and responsive. 
+This requirement is handled by the GUI implementation using Android Studio Activities and Intents. 
+
+## Requirement 8: 
+#### For simplicity, you may assume there is a single system running the app (no communication or saving between devices is necessary). 
+This requirement is shown through the `MainMenu` class of the diagram. It serves as the entry point with having a 1 to 1 relationship with `User`, to depict the system is running for one user at a time. Aside from that, this is realized during implementation. 
